@@ -1,0 +1,13 @@
+{
+    "status": "true",
+    "feeds": [
+        {
+            "title": "Batman University",
+            "description": "Batman University is a seasonal podcast about you know who. It began with an analysis of episodes of “Batman: The Animated Series” but has now expanded to cover other series, movies, and media. Your professor is Tony Sindelar.",
+            "image": "https://www.theincomparable.com/imgs/logos/logo-batmanuniversity-3x.jpg?cache-buster=2019-06-11",
+            "itunesId": 1441923632,
+            "dead": 0
+        }
+    ],
+    "description": "Found matching feed"
+}
