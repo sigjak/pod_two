@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import '../screens/commons/player_buttons.dart';
 
 class AudioScreen extends StatefulWidget {
   AudioScreen(this.url, this.image, this.episodeName, this.collectionName,
@@ -52,12 +53,7 @@ class _AudioScreenState extends State<AudioScreen> {
                 child: Image.network(widget.image),
               ),
               Center(
-                child: StreamBuilder<PlayerState>(
-                    stream: _audioPlayer.playerStateStream,
-                    builder: (context, snapshot) {
-                      final playerState = snapshot.data;
-                      return _playerButton(playerState);
-                    }),
+                child: PlayerButtons(_audioPlayer),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -91,36 +87,36 @@ class _AudioScreenState extends State<AudioScreen> {
     );
   }
 
-  Widget _playerButton(PlayerState playerState) {
-    final procesingState = playerState?.processingState;
-    if (procesingState == ProcessingState.loading ||
-        procesingState == ProcessingState.buffering) {
-      return Container(
-        margin: EdgeInsets.all(8.0),
-        width: 64.0,
-        height: 64.0,
-        child: CircularProgressIndicator(),
-      );
-    } else if (_audioPlayer.playing != true) {
-      return IconButton(
-        icon: Icon(Icons.play_arrow),
-        iconSize: 64.0,
-        onPressed: () {
-          _audioPlayer.play();
-        },
-      );
-    } else if (procesingState != ProcessingState.completed) {
-      return IconButton(
-        icon: Icon(Icons.pause),
-        iconSize: 64.0,
-        onPressed: _audioPlayer.pause,
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.replay),
-        onPressed: () => _audioPlayer.seek(Duration.zero,
-            index: _audioPlayer.effectiveIndices.first),
-      );
-    }
-  }
+  // Widget _playerButton(PlayerState playerState) {
+  //   final procesingState = playerState?.processingState;
+  //   if (procesingState == ProcessingState.loading ||
+  //       procesingState == ProcessingState.buffering) {
+  //     return Container(
+  //       margin: EdgeInsets.all(8.0),
+  //       width: 64.0,
+  //       height: 64.0,
+  //       child: CircularProgressIndicator(),
+  //     );
+  //   } else if (_audioPlayer.playing != true) {
+  //     return IconButton(
+  //       icon: Icon(Icons.play_arrow),
+  //       iconSize: 64.0,
+  //       onPressed: () {
+  //         _audioPlayer.play();
+  //       },
+  //     );
+  //   } else if (procesingState != ProcessingState.completed) {
+  //     return IconButton(
+  //       icon: Icon(Icons.pause),
+  //       iconSize: 64.0,
+  //       onPressed: _audioPlayer.pause,
+  //     );
+  //   } else {
+  //     return IconButton(
+  //       icon: Icon(Icons.replay),
+  //       onPressed: () => _audioPlayer.seek(Duration.zero,
+  //           index: _audioPlayer.effectiveIndices.first),
+  //     );
+  //   }
+  // }
 }
