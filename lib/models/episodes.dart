@@ -14,8 +14,8 @@ class Episodes {
     this.results,
   });
 
-  int resultCount;
-  List<Result> results;
+  int? resultCount;
+  List<Result>? results;
 
   factory Episodes.fromJson(Map<String, dynamic> json) => Episodes(
         resultCount: json["resultCount"],
@@ -25,7 +25,7 @@ class Episodes {
 
   Map<String, dynamic> toJson() => {
         "resultCount": resultCount,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
       };
 }
 
@@ -39,12 +39,12 @@ class Result {
     this.description,
   });
 
-  DateTime releaseDate;
-  String collectionName;
-  String trackName;
-  String episodeUrl;
-  String artworkUrl600;
-  String description;
+  DateTime? releaseDate;
+  String? collectionName;
+  String? trackName;
+  String? episodeUrl;
+  String? artworkUrl600;
+  String? description;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         releaseDate: DateTime.parse(json["releaseDate"]),
@@ -56,7 +56,7 @@ class Result {
       );
 
   Map<String, dynamic> toJson() => {
-        "releaseDate": releaseDate.toIso8601String(),
+        "releaseDate": releaseDate!.toIso8601String(),
         "collectionName": collectionName,
         "trackName": trackName,
         "episodeUrl": episodeUrl,

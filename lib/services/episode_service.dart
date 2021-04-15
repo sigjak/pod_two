@@ -11,7 +11,7 @@ class EpisodeService {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Episodes episodes = episodesFromJson(response.body);
-      result = episodes.results;
+      result = episodes.results!;
 
       // print(result.length);
       // print(result[0].collectionName);

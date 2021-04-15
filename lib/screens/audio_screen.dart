@@ -16,7 +16,7 @@ class AudioScreen extends StatefulWidget {
 }
 
 class _AudioScreenState extends State<AudioScreen> {
-  AudioPlayer _audioPlayer;
+  late AudioPlayer _audioPlayer;
   @override
   void initState() {
     _audioPlayer = AudioPlayer();

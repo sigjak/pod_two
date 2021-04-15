@@ -9,7 +9,7 @@ class PlayerButtons extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        StreamBuilder<SequenceState>(
+        StreamBuilder<SequenceState?>(
           stream: _audioPlayer.sequenceStateStream,
           builder: (_, __) {
             return _previousButton();
@@ -22,7 +22,7 @@ class PlayerButtons extends StatelessWidget {
             return _playPauseButton(playerState);
           },
         ),
-        StreamBuilder<SequenceState>(
+        StreamBuilder<SequenceState?>(
           stream: _audioPlayer.sequenceStateStream,
           builder: (_, __) {
             return _nextButton();
@@ -46,7 +46,7 @@ class PlayerButtons extends StatelessWidget {
     );
   }
 
-  Widget _playPauseButton(PlayerState playerState) {
+  Widget _playPauseButton(PlayerState? playerState) {
     final procesingState = playerState?.processingState;
     if (procesingState == ProcessingState.loading ||
         procesingState == ProcessingState.buffering) {
@@ -74,7 +74,7 @@ class PlayerButtons extends StatelessWidget {
       return IconButton(
         icon: Icon(Icons.replay),
         onPressed: () => _audioPlayer.seek(Duration.zero,
-            index: _audioPlayer.effectiveIndices.first),
+            index: _audioPlayer.effectiveIndices?.first),
       );
     }
   }

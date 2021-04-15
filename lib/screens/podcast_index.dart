@@ -14,9 +14,9 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
   PodcastIndexService podcastIndexService = PodcastIndexService();
   EpisodeService episodeService = EpisodeService();
 
-  List<Feed> _feeds;
+  List<Feed>? _feeds;
   bool isSearching = false;
-  String searchTerm;
+  late String searchTerm;
   final myController = TextEditingController();
 
   Future<void> getPodcasts(String searchTerm) async {
@@ -98,7 +98,7 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
             else
               Expanded(
                 child: ListView.builder(
-                    itemCount: _feeds.length < 10 ? _feeds.length : 10,
+                    itemCount: _feeds!.length < 10 ? _feeds!.length : 10,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -111,22 +111,22 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
                                 leading: ClipRRect(
                                   borderRadius: BorderRadius.circular(4.0),
                                   child: Image.network(
-                                    _feeds[index].image,
+                                    _feeds![index].image!,
                                     errorBuilder: (BuildContext context,
                                         Object exception,
-                                        StackTrace stackTrace) {
+                                        StackTrace? stackTrace) {
                                       return Image(
                                         image: AssetImage('assets/dd.png'),
                                       );
                                     },
                                   ),
                                 ),
-                                title: Text(_feeds[index].title),
-                                subtitle: Text(_feeds[index].description),
+                                title: Text(_feeds![index].title!),
+                                subtitle: Text(_feeds![index].description!),
                                 dense: true,
                                 trailing: IconButton(
                                   onPressed: () async {
-                                    int itunesId = _feeds[index].itunesId;
+                                    int? itunesId = _feeds![index].itunesId;
 
                                     if (itunesId != null) {
                                       List<Result> episodeList =

@@ -41,8 +41,8 @@ class PodcastIndexService {
       List<Feed> cleanList = [];
       Podcasts podcasts = podcastsFromJson(response.body);
 
-      podcasts.feeds.forEach((element) {
-        if (element.itunesId is int && element.itunesId > 0) {
+      podcasts.feeds!.forEach((element) {
+        if (element.itunesId is int && element.itunesId! > 0) {
           cleanList.add(element);
         }
       });

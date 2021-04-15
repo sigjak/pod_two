@@ -14,8 +14,8 @@ class Podcasts {
     this.feeds,
   });
 
-  String status;
-  List<Feed> feeds;
+  String? status;
+  List<Feed>? feeds;
 
   factory Podcasts.fromJson(Map<String, dynamic> json) => Podcasts(
         status: json["status"],
@@ -24,7 +24,7 @@ class Podcasts {
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "feeds": List<dynamic>.from(feeds.map((x) => x.toJson())),
+        "feeds": List<dynamic>.from(feeds!.map((x) => x.toJson())),
       };
 }
 
@@ -36,10 +36,10 @@ class Feed {
     this.itunesId,
   });
 
-  String title;
-  String description;
-  String image;
-  int itunesId;
+  String? title;
+  String? description;
+  String? image;
+  int? itunesId;
 
   factory Feed.fromJson(Map<String, dynamic> json) => Feed(
         title: json["title"],

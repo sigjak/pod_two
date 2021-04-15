@@ -25,7 +25,8 @@ class EpisodeScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(headers.collectionName, style: TextStyle(fontSize: 24)),
+            child:
+                Text(headers.collectionName!, style: TextStyle(fontSize: 24)),
           ),
           Expanded(
             child: ListView.builder(
@@ -46,22 +47,22 @@ class EpisodeScreen extends StatelessWidget {
                                   TextSpan(
                                       style: TextStyle(fontSize: 10),
                                       text:
-                                          ' ${func(episodes[index].releaseDate)}')
+                                          ' ${func(episodes[index].releaseDate!)}')
                                 ]),
                           ),
-                          subtitle: Text(episodes[index].description),
+                          subtitle: Text(episodes[index].description!),
                           trailing: IconButton(
                               onPressed: () {
-                                print(episodes[index].episodeUrl);
+                                // print(episodes[index].episodeUrl);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AudioScreen(
-                                        episodes[index].episodeUrl,
-                                        episodes[index].artworkUrl600,
-                                        episodes[index].trackName,
-                                        episodes[index].collectionName,
-                                        episodes[index].description),
+                                        episodes[index].episodeUrl!,
+                                        episodes[index].artworkUrl600!,
+                                        episodes[index].trackName!,
+                                        episodes[index].collectionName!,
+                                        episodes[index].description!),
                                   ),
                                 );
                               },
