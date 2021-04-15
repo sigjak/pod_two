@@ -34,7 +34,7 @@ class Result {
     this.releaseDate,
     this.collectionName,
     this.trackName,
-    this.trackViewUrl,
+    this.episodeUrl,
     this.artworkUrl600,
     this.description,
   });
@@ -42,7 +42,7 @@ class Result {
   DateTime releaseDate;
   String collectionName;
   String trackName;
-  String trackViewUrl;
+  String episodeUrl;
   String artworkUrl600;
   String description;
 
@@ -50,7 +50,7 @@ class Result {
         releaseDate: DateTime.parse(json["releaseDate"]),
         collectionName: json["collectionName"],
         trackName: json["trackName"],
-        trackViewUrl: json["trackViewUrl"],
+        episodeUrl: json["episodeUrl"],
         artworkUrl600: json["artworkUrl600"],
         description: json["description"],
       );
@@ -59,7 +59,7 @@ class Result {
         "releaseDate": releaseDate.toIso8601String(),
         "collectionName": collectionName,
         "trackName": trackName,
-        "trackViewUrl": trackViewUrl,
+        "episodeUrl": episodeUrl,
         "artworkUrl600": artworkUrl600,
         "description": description,
       };

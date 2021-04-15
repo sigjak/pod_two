@@ -52,11 +52,12 @@ class EpisodeScreen extends StatelessWidget {
                           subtitle: Text(episodes[index].description),
                           trailing: IconButton(
                               onPressed: () {
+                                print(episodes[index].episodeUrl);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AudioScreen(
-                                        episodes[index].trackViewUrl,
+                                        episodes[index].episodeUrl,
                                         episodes[index].artworkUrl600,
                                         episodes[index].trackName,
                                         episodes[index].collectionName,
