@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/services.dart';
 import '../services/podcastindex_service.dart';
 import '../models/podcast_model.dart';
 import '../models/episodes.dart';
@@ -12,19 +14,31 @@ class PodcastIndexScreen extends StatefulWidget {
 
 class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
   PodcastIndexService podcastIndexService = PodcastIndexService();
+
   EpisodeService episodeService = EpisodeService();
 
   List<Feed>? _feeds;
   bool isSearching = false;
   late String searchTerm;
-  final myController = TextEditingController();
+  final textController = TextEditingController();
 
   Future<void> getPodcasts(String searchTerm) async {
     await podcastIndexService.fetchPodCastIndex(searchTerm).then((feeds) {
-      setState(() {
-        _feeds = feeds;
-      });
+      if (feeds.isEmpty) {
+        Alert(context: context, type: AlertType.error, title: 'Nothing found!')
+            .show();
+      } else {
+        setState(() {
+          _feeds = feeds;
+        });
+      }
+    }).catchError((error) {
+      print('Some eror $error');
     });
+  }
+
+  onError() {
+    print('something');
   }
 
   @override
@@ -41,49 +55,14 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
 
   @override
   void dispose() {
-    myController.dispose();
+    textController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: !isSearching
-              ? Text('Podcasts')
-              : TextField(
-                  style: TextStyle(color: Colors.white),
-                  cursorColor: Colors.white,
-                  autofocus: true,
-                  controller: myController,
-                  decoration: InputDecoration(
-                    hintText: '   ....search for podcasts by name',
-                    hintStyle: TextStyle(color: Colors.grey[300]),
-                  ),
-                ),
-          actions: [
-            !isSearching
-                ? IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        myController.clear();
-                        isSearching = true;
-                      });
-                    })
-                : IconButton(
-                    icon: Icon(Icons.check),
-                    onPressed: () async {
-                      String temp = myController.text.trim();
-                      searchTerm = temp.replaceAll(' ', '+');
-                      await getPodcasts(searchTerm);
-
-                      setState(() {
-                        isSearching = false;
-                      });
-                    }),
-          ],
-        ),
+        appBar: buildAppBar(context),
         body: Column(
           children: [
             Padding(
@@ -155,5 +134,80 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
               ),
           ],
         ));
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      leading: !isSearching
+          ? SizedBox()
+          : IconButton(
+              onPressed: () {
+                setState(() {
+                  isSearching = !isSearching;
+                  print('cancel');
+                });
+              },
+              icon: Icon(Icons.cancel_outlined),
+            ),
+      title: !isSearching
+          ? Text('Podcast')
+          : TextField(
+              cursorColor: Colors.white,
+              style: TextStyle(color: Colors.white),
+              autofocus: true,
+              controller: textController,
+              decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Colors.white),
+                  hintText: '    ...search here for a podcast'),
+            ),
+      centerTitle: true,
+      actions: [
+        !isSearching
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    isSearching = !isSearching;
+                  });
+                },
+                icon: Icon(Icons.search),
+              )
+            : IconButton(
+                onPressed: () async {
+                  var regexp = RegExp(r'^[a-zA-Z0-9\s+]+$');
+                  var temp = textController.text.trim();
+                  textController.clear();
+
+                  // temp.contains(r'/[|\\/~^:,;?!&%$@*+]/');
+
+                  if (regexp.hasMatch(temp)) {
+                    setState(() {
+                      isSearching = false;
+                      searchTerm = temp.replaceAll(' ', '+');
+                    });
+                    await getPodcasts(searchTerm);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.all(16),
+                        elevation: 5,
+                        content: Text(
+                          'Illegal search term!',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  }
+
+                  setState(() {
+                    isSearching = false;
+                  });
+
+                  SystemChannels.textInput.invokeMethod('TextInput.hide');
+                },
+                icon: Icon(Icons.arrow_forward_outlined),
+              ),
+      ],
+    );
   }
 }

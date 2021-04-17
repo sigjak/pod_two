@@ -86,37 +86,4 @@ class _AudioScreenState extends State<AudioScreen> {
       ),
     );
   }
-
-  // Widget _playerButton(PlayerState playerState) {
-  //   final procesingState = playerState?.processingState;
-  //   if (procesingState == ProcessingState.loading ||
-  //       procesingState == ProcessingState.buffering) {
-  //     return Container(
-  //       margin: EdgeInsets.all(8.0),
-  //       width: 64.0,
-  //       height: 64.0,
-  //       child: CircularProgressIndicator(),
-  //     );
-  //   } else if (_audioPlayer.playing != true) {
-  //     return IconButton(
-  //       icon: Icon(Icons.play_arrow),
-  //       iconSize: 64.0,
-  //       onPressed: () {
-  //         _audioPlayer.play();
-  //       },
-  //     );
-  //   } else if (procesingState != ProcessingState.completed) {
-  //     return IconButton(
-  //       icon: Icon(Icons.pause),
-  //       iconSize: 64.0,
-  //       onPressed: _audioPlayer.pause,
-  //     );
-  //   } else {
-  //     return IconButton(
-  //       icon: Icon(Icons.replay),
-  //       onPressed: () => _audioPlayer.seek(Duration.zero,
-  //           index: _audioPlayer.effectiveIndices.first),
-  //     );
-  //   }
-  // }
 }

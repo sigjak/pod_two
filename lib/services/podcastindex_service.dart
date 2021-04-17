@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 import 'package:convert/convert.dart';
+
 import 'dart:convert';
 import '../models/podcast_model.dart';
 
@@ -46,9 +47,10 @@ class PodcastIndexService {
           cleanList.add(element);
         }
       });
-
+      print(response.statusCode);
       return cleanList;
     } else {
+      print(response.statusCode);
       throw Exception('Failed to load album');
     }
   }
