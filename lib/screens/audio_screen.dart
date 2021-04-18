@@ -53,12 +53,8 @@ class _AudioScreenState extends State<AudioScreen> {
                 height: MediaQuery.of(context).size.height / 3,
                 child: Image.network(widget.image),
               ),
-              Center(
-                child: PlayerButtons(_audioPlayer),
-              ),
-              Center(
-                child: SliderBar(_audioPlayer),
-              ),
+              PlayerButtons(_audioPlayer),
+              SliderBar(_audioPlayer),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
                 child: Text(

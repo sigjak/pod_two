@@ -47,9 +47,10 @@ class PlayerButtons extends StatelessWidget {
   }
 
   Widget _playPauseButton(PlayerState? playerState) {
-    final procesingState = playerState?.processingState;
-    if (procesingState == ProcessingState.loading ||
-        procesingState == ProcessingState.buffering) {
+    final processingState = playerState?.processingState;
+    if (processingState == ProcessingState.loading ||
+        processingState == ProcessingState.buffering) {
+      print(playerState);
       return Container(
         margin: EdgeInsets.all(8.0),
         width: 64.0,
@@ -64,7 +65,7 @@ class PlayerButtons extends StatelessWidget {
           _audioPlayer.play();
         },
       );
-    } else if (procesingState != ProcessingState.completed) {
+    } else if (processingState != ProcessingState.completed) {
       return IconButton(
         icon: Icon(Icons.pause),
         iconSize: 64.0,
@@ -73,6 +74,7 @@ class PlayerButtons extends StatelessWidget {
     } else {
       return IconButton(
         icon: Icon(Icons.replay),
+        iconSize: 64,
         onPressed: () => _audioPlayer.seek(Duration.zero,
             index: _audioPlayer.effectiveIndices?.first),
       );
