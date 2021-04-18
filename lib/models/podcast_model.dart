@@ -18,13 +18,13 @@ class Podcasts {
   List<Feed>? feeds;
 
   factory Podcasts.fromJson(Map<String, dynamic> json) => Podcasts(
-        status: json["status"],
-        feeds: List<Feed>.from(json["feeds"].map((x) => Feed.fromJson(x))),
+        status: json['status'],
+        feeds: List<Feed>.from(json['feeds'].map((x) => Feed.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status,
-        "feeds": List<dynamic>.from(feeds!.map((x) => x.toJson())),
+        'status': status,
+        'feeds': List<dynamic>.from(feeds!.map((x) => x.toJson())),
       };
 }
 
@@ -42,16 +42,16 @@ class Feed {
   int? itunesId;
 
   factory Feed.fromJson(Map<String, dynamic> json) => Feed(
-        title: json["title"],
-        description: json["description"],
-        image: json["image"],
-        itunesId: json["itunesId"],
+        title: json['title'],
+        description: json['description'],
+        image: json['image'],
+        itunesId: json['itunesId'],
       );
 
   Map<String, dynamic> toJson() => {
-        "title": title,
-        "description": description,
-        "image": image,
-        "itunesId": itunesId,
+        'title': title,
+        'description': description,
+        'image': image,
+        'itunesId': itunesId,
       };
 }

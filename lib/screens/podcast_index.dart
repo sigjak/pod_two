@@ -3,7 +3,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/services.dart';
 import '../services/podcastindex_service.dart';
 import '../models/podcast_model.dart';
-import '../models/episodes.dart';
 import '../services/episode_service.dart';
 import './episode_screen.dart';
 
@@ -35,10 +34,6 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
     }).catchError((error) {
       print('Some eror $error');
     });
-  }
-
-  onError() {
-    print('something');
   }
 
   @override
@@ -105,16 +100,15 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
                                 dense: true,
                                 trailing: IconButton(
                                   onPressed: () async {
-                                    int? itunesId = _feeds![index].itunesId;
+                                    var itunesId = _feeds![index].itunesId;
 
                                     if (itunesId != null) {
-                                      List<Result> episodeList =
-                                          await episodeService
-                                              .getEpisodes(itunesId.toString());
+                                      var episodeList = await episodeService
+                                          .getEpisodes(itunesId.toString());
 
                                       var headers = episodeList.removeAt(0);
 
-                                      Navigator.push(
+                                      await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => EpisodeScreen(
@@ -203,7 +197,7 @@ class _PodcastIndexScreenState extends State<PodcastIndexScreen> {
                     isSearching = false;
                   });
 
-                  SystemChannels.textInput.invokeMethod('TextInput.hide');
+                  await SystemChannels.textInput.invokeMethod('TextInput.hide');
                 },
                 icon: Icon(Icons.arrow_forward_outlined),
               ),

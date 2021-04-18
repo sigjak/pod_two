@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import '../screens/commons/player_buttons.dart';
+import 'commons/slider_bar.dart';
 
 class AudioScreen extends StatefulWidget {
   AudioScreen(this.url, this.image, this.episodeName, this.collectionName,
@@ -54,6 +55,9 @@ class _AudioScreenState extends State<AudioScreen> {
               ),
               Center(
                 child: PlayerButtons(_audioPlayer),
+              ),
+              Center(
+                child: SliderBar(_audioPlayer),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),

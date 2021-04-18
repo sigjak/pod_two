@@ -9,9 +9,9 @@ class EpisodeScreen extends StatelessWidget {
 
   final Result headers;
   final List<Result> episodes;
-  final newFormat = DateFormat("dd-MM-y");
+  final newFormat = DateFormat('dd-MM-y');
   final TextStyle defaultStyle = TextStyle(fontSize: 12, color: Colors.black);
-  func<String>(DateTime inp) {
+  String func(DateTime inp) {
     return newFormat.format(inp);
   }
 

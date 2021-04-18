@@ -18,14 +18,14 @@ class Episodes {
   List<Result>? results;
 
   factory Episodes.fromJson(Map<String, dynamic> json) => Episodes(
-        resultCount: json["resultCount"],
+        resultCount: json['resultCount'],
         results:
-            List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+            List<Result>.from(json['results'].map((x) => Result.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "resultCount": resultCount,
-        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
+        'resultCount': resultCount,
+        'results': List<dynamic>.from(results!.map((x) => x.toJson())),
       };
 }
 
@@ -47,20 +47,20 @@ class Result {
   String? description;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        releaseDate: DateTime.parse(json["releaseDate"]),
-        collectionName: json["collectionName"],
-        trackName: json["trackName"],
-        episodeUrl: json["episodeUrl"],
-        artworkUrl600: json["artworkUrl600"],
-        description: json["description"],
+        releaseDate: DateTime.parse(json['releaseDate']),
+        collectionName: json['collectionName'],
+        trackName: json['trackName'],
+        episodeUrl: json['episodeUrl'],
+        artworkUrl600: json['artworkUrl600'],
+        description: json['description'],
       );
 
   Map<String, dynamic> toJson() => {
-        "releaseDate": releaseDate!.toIso8601String(),
-        "collectionName": collectionName,
-        "trackName": trackName,
-        "episodeUrl": episodeUrl,
-        "artworkUrl600": artworkUrl600,
-        "description": description,
+        'releaseDate': releaseDate!.toIso8601String(),
+        'collectionName': collectionName,
+        'trackName': trackName,
+        'episodeUrl': episodeUrl,
+        'artworkUrl600': artworkUrl600,
+        'description': description,
       };
 }
